@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Scrolling Demo</title>
+    <style>
+        .parallax-container {
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            perspective: 1px;
+            transform-style: preserve-3d;
+        }
+
+        .parallax-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background-image: url('your-image.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            z-index: -1;
+            transform: translateZ(-1px) scale(2);
+        }
+
+        .parallax-content {
+            position: relative;
+            background: white;
+            padding: 20px;
+            margin-top: 100vh;
+            min-height: 100vh;
+        }
+
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Mobile fallback */
+        @media (max-width: 768px) {
+            .parallax-background {
+                background-attachment: scroll !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-container">
+        <div class="parallax-background"></div>
+        <div class="parallax-content">
+            <div class="content-section">
+                <h1>Welcome to Our Website</h1>
+                <p>This is a demonstration of parallax scrolling effect. As you scroll down, the background moves slower than the foreground content, creating a nice depth illusion.</p>
+                
+                <h2>About This Effect</h2>
+                <p>The parallax effect is achieved through CSS 3D transforms and JavaScript. The background image is positioned absolutely and translated on the Z-axis to create the depth effect.</p>
+                
+                <h2>How It Works</h2>
+                <p>When you scroll, our JavaScript calculates the scroll position and adjusts the background position accordingly, making it move at a different speed than the rest of the content.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bg = document.querySelector('.parallax-background');
+            
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                // Adjust the multiplier (0.5) to change parallax speed
+                bg.style.transform = 'translateZ(-1px) scale(2) translateY(' + scrollPosition * 0.5 + 'px)';
+            });
+
+            // Initialize position on load
+            bg.style.transform = 'translateZ(-1px) scale(2) translateY(0)';
+        });
+
+        // Fallback for mobile devices
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        if (isMobile()) {
+            const bg = document.querySelector('.parallax-background');
+            bg.style.transform = 'none';
+            bg.style.position = 'absolute';
+        }
+    </script>
+</body>
+</html>
