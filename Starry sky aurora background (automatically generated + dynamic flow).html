@@ -1,0 +1,52 @@
+<div class="aurora-bg"></div>
+
+<style>
+.aurora-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* 星星 */
+.aurora-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, white, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, white, rgba(0,0,0,0));
+  background-size: 100px 100px;
+}
+
+/* 极光 */
+.aurora-bg::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 50%;
+  background: linear-gradient(
+    0deg,
+    rgba(18,113,255,0.1) 0%,
+    rgba(0,194,255,0.2) 20%,
+    rgba(128,0,128,0.1) 40%,
+    transparent 100%
+  );
+  animation: aurora-flow 15s infinite linear;
+  transform: rotate(-2deg);
+}
+
+@keyframes aurora-flow {
+  from { transform: translateX(0) rotate(-2deg); }
+  to { transform: translateX(-50%) rotate(-2deg); }
+}
+</style>

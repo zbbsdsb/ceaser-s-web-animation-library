@@ -1,0 +1,46 @@
+<button class="liquid-button">Hover Me</button>
+
+<style>
+.liquid-button {
+  position: relative;
+  padding: 15px 40px;
+  font-size: 18px;
+  background: linear-gradient(45deg, #ff00cc, #3333ff);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0 0 10px rgba(255,0,204,0.5));
+}
+
+.liquid-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at var(--x) var(--y), 
+    rgba(255,255,255,0.8) 0%, 
+    transparent 70%
+  );
+  transition: transform 0.3s;
+  transform: translate(calc(var(--x) * -1), calc(var(--y) * -1));
+}
+
+.liquid-button:hover::before {
+  transform: translate(0, 0);
+}
+</style>
+
+<script>
+document.querySelector('.liquid-button').addEventListener('mousemove', (e) => {
+  const rect = e.target.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
+  e.target.style.setProperty('--x', `${x}%`);
+  e.target.style.setProperty('--y', `${y}%`);
+});
+</script>

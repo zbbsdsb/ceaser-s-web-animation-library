@@ -1,0 +1,36 @@
+<div class="typewriter">
+    <h1 id="typing-text"></h1>
+  </div>
+  
+  <script>
+  const text = "Cool, bro.";
+  let i = 0;
+  
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("typing-text").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100);
+    }
+  }
+  
+  window.onload = function() {
+    setTimeout(typeWriter, 1000);
+  };
+  </script>
+  
+  <style>
+  .typewriter h1 {
+    overflow: hidden;
+    border-right: 0.15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.15em;
+    animation: blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }
+  </style>
